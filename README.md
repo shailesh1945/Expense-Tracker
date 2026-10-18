@@ -1,11 +1,6 @@
 # Smart Expense Tracker
 
-![CI](https://github.com/<your-username>/<repo>/actions/workflows/ci.yml/badge.svg)
-
 A full-stack personal finance app to track expenses, set monthly budgets and see spending insights. Built with a FastAPI REST API, MongoDB and a React dashboard.
-
-**Live demo:** <vercel-url> (API docs: <render-url>/docs)
-> The API runs on a free tier and may take up to a minute to wake up on the first request.
 
 ![Dashboard](docs/screenshots/dashboard.png)
 
@@ -25,8 +20,7 @@ A full-stack personal finance app to track expenses, set monthly budgets and see
 | Database | MongoDB (aggregation pipelines, unique and compound indexes) |
 | Auth | JWT (PyJWT), Argon2 |
 | Frontend | React (Vite), Material UI, Recharts, Axios |
-| Testing / CI | pytest, GitHub Actions |
-| DevOps | Docker, Docker Compose, Render, Vercel, MongoDB Atlas |
+| Testing | pytest |
 
 ## Architecture
 
@@ -34,7 +28,7 @@ A full-stack personal finance app to track expenses, set monthly budgets and see
 React (Vercel)  --HTTPS + JWT-->  FastAPI (Render)  --->  MongoDB Atlas
 ```
 
-## Run with Docker (quickest)
+<!--## Run with Docker (quickest)
 
 ```bash
 git clone https://github.com/<your-username>/<repo>.git
@@ -42,11 +36,12 @@ cd <repo>
 cp .env.example .env        # then put a real SECRET_KEY in .env
 docker compose up --build
 ```
+-->
 
 - App: http://localhost:3000
 - API docs (Swagger): http://localhost:8000/docs
 
-## Run locally without Docker
+<!-- ## Run locally without Docker -->
 
 **Backend** (needs Python 3.12 and a MongoDB instance)
 
