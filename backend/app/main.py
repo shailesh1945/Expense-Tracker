@@ -4,14 +4,18 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.db.mongo import client, db
+from app.core.config import settings
 
 from app.routers import analytics, auth, budgets, expenses
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    if settings.secret_key == "change-me" or len(settings.secret_key) < 32:
+        raise RuntimeError("SECRET_KEY must be a random string of at least 32 characters")
+
     await db.users.create_index("email", unique=True)
     await db.expenses.create_index([("user_id", 1), ("date", -1)])
-    await db.budgets.create_index(                                  # new
+    await db.budgets.create_index(
         [("user_id", 1), ("month", 1), ("category", 1)], unique=True
     )
     yield
@@ -22,7 +26,7 @@ app = FastAPI(title="Smart Expense Tracker API", version="1.0.0", lifespan=lifes
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[o.strip() for o in settings.cors_origins.split(",") if o.strip()],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
