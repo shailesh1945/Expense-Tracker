@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+pymongo
+pydantic[email]
+pydantic-settings
+pyjwt
+pwdlib[argon2]
+python-multipart
+pytest
+httpx
